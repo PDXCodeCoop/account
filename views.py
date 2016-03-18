@@ -57,6 +57,8 @@ def profile_public(request, username):
 
 
 def register(request):
+    if request.user.is_authenticated():
+        return redirect('/')
     userform = UserForm(request.POST or None, prefix='user')
     profileform = ProfileForm(request.POST or None, prefix='profile')
     args = {}
