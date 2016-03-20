@@ -1,7 +1,7 @@
 
 from django.contrib.auth import logout,authenticate, login
 from django.utils import timezone
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template.context_processors import csrf
 from django.contrib import auth
@@ -12,6 +12,8 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Sum, F, FloatField, Q, IntegerField
 
 from models import *
+from django.contrib.auth.models import User
+
 from views_social import *
 
 def login_view(request):
@@ -47,7 +49,16 @@ def profile_private(request):
     args = {}
     return render_to_response('account/profile_private.html', RequestContext(request,args))
 
+def profile_public(request, username):
+    args = {
+        "profile": get_object_or_404(User, username=username)
+    }
+    return render_to_response('account/profile_public.html', RequestContext(request,args))
+
+
 def register(request):
+    if request.user.is_authenticated():
+        return redirect('/')
     userform = UserForm(request.POST or None, prefix='user')
     profileform = ProfileForm(request.POST or None, prefix='profile')
     args = {}
