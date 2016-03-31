@@ -3,8 +3,31 @@
 {% block head %}
 	{{ block.super }}
 	<link href="{% static 'account/css/login.css' %}" rel="stylesheet">
+	<style type="text/css">
+	    .btn-social {
+	        color: white;
+	        opacity: 0.8;
+	    }
+
+	    .btn-social:hover {
+	        color: white;
+	        opacity: 1;
+	        text-decoration: none;
+	    }
+
+	    .btn-facebook {
+	        background-color: #3b5998;
+	    }
+
+	    .btn-google {
+	        background-color: #c32f10;
+	    }
+	</style>
 {% endblock %}
 {% block content %}
+	{% if request.user.is_authenticated %}
+	<h1> Welcome, {{ request.user.username }} </h1>
+	{% else %}
 	<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
@@ -15,7 +38,13 @@
 							{% csrf_token %}
 							<input type="text" placeholder="Username" class="main-form" id="username" name="username"/>
 							<input type="password" placeholder="Password" class="main-form" id="password" name="password" />
-							<button type="submit" class="btn btn-default">Login</button>
+							<ul class="list-inline">
+								<li><button type="submit" class="btn btn-default">Login</button></li>
+								<li><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-social btn-facebook">
+	                            	<i class="fa fa-facebook"></i>&nbsp; Facebook</a></li>
+	                        	<li><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ index }}" class="btn btn-social btn-google">
+	                            	<i class="fa fa-google-plus"></i>&nbsp; Google</a></li>
+							</ul>
 						</form>
 					</div><!--/login form-->
 				</div>
@@ -73,4 +102,5 @@
 			</div>
 		</div>
 	</section><!--/form-->
+	{% endif %}
   {% endblock %}
