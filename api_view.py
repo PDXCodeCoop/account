@@ -5,13 +5,6 @@ from rest_framework import viewsets
 
 #Profile/User
 class ProfileViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-
-    Additionally we also provide an extra `highlight` action.
-
-    """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
