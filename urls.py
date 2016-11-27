@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from . import views
 
@@ -10,5 +10,5 @@ urlpatterns = [
                url(r'^social$', views.login_social, name='login_social'),
                url(r'^profile$', views.profile_private, name='profile'),
                url(r'^public/(?P<username>[^\.]+)/$', views.profile_public, name='public'),
-               
+
                ]

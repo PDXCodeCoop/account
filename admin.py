@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from models import *
+from .models import *
 from django.contrib.auth.models import User
 
 class ProfileAdminForm(forms.ModelForm):

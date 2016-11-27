@@ -11,10 +11,10 @@ from django.core.exceptions import PermissionDenied
 
 from django.db.models import Sum, F, FloatField, Q, IntegerField
 
-from models import *
+from .models import *
 from django.contrib.auth.models import User
 
-from views_social import *
+from .views_social import *
 
 def login_view(request):
     args = {}
@@ -42,7 +42,7 @@ def profile_listing(request):
     args = {
         "profiles": Profile.objects.all()
     }
-    return render_to_response('account/index.html', RequestContext(request,args))
+    return render(request, 'account/index.html', args)
 
 # The user's personal profile - Should be viewable by ONLY that user
 def profile_private(request):
@@ -80,4 +80,4 @@ def register(request):
                 return redirect('/', RequestContext(request,args))
     args['userform'] = userform
     args['profileform'] = profileform
-    return render_to_response('account/login.html', RequestContext(request,args))
+    return render(request, 'account/login.html', args)
