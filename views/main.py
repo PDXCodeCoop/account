@@ -11,10 +11,13 @@ from django.core.exceptions import PermissionDenied
 
 from django.db.models import Sum, F, FloatField, Q, IntegerField
 
-from .models import *
+from ..models import *
 from django.contrib.auth.models import User
 
-from .views_social import *
+from .social_media import *
+
+from ..serializers.models import UserSerializer
+from ..serializers.forms import LoginSerializer
 
 def login_view(request):
     args = {}

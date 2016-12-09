@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 
 from django.contrib.auth.models import User
-from .models import Profile
+from ..models import Profile
 
-from .serializers import UserSerializer, ProfileSerializer
+from ..serializers.models import UserSerializer, ProfileSerializer
 
 from rest_framework import filters, permissions
 from rest_framework.decorators import api_view

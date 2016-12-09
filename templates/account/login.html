@@ -28,76 +28,18 @@
 	{% if request.user.is_authenticated %}
 	<h1> Welcome, {{ request.user.username }} </h1>
 	{% else %}
+	{% load rest_framework %}
 	<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
-					<div class="login-form"><!--login form-->
-						<h2>Login to your account</h2>
-						<form class="form-signin"  action="{% url 'account:login' %}" method="post">
-							{% csrf_token %}
-							<input type="text" placeholder="Username" class="main-form" id="username" name="username"/>
-							<input type="password" placeholder="Password" class="main-form" id="password" name="password" />
-							<ul class="list-inline">
-								<li><button type="submit" class="btn btn-default">Login</button></li>
-								<li><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-social btn-facebook">
-	                            	<i class="fa fa-facebook"></i>&nbsp; Facebook</a></li>
-	                        	<li><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ index }}" class="btn btn-social btn-google">
-	                            	<i class="fa fa-google-plus"></i>&nbsp; Google</a></li>
-							</ul>
-						</form>
-					</div><!--/login form-->
+					{% include 'forms/login.html' %}
 				</div>
 				<div class="col-sm-1">
 					<h2 class="or">OR</h2>
 				</div>
 				<div class="col-sm-4">
-					<div class="signup-form"><!--sign up form-->
-						<h2>New User Signup!</h2>
-							<form class="form-horizontal" method="post" action="{% url 'account:register' %}">
-								{% csrf_token %}
-						      <fieldset>
-						          {% for field in userform %}
-						              {% if field.errors and field.required %}
-						                  <div class="control-group error">
-						                      <label class="control-label">
-												  {% if field.label == "Username" %}
-												  	E-Mail/Username:
-												  {% else %}
-													{{ field.label }}
-												  {% endif %}
-											  </label>
-						                      <div class="controls">{{ field }}
-						                          <span style="color:red" class="help-inline">
-						                              {% for error in  field.errors %}{{ error }}{% endfor %}
-						                          </span>
-						                      </div>
-						                  </div>
-						              {% else %}
-									  	{% if field.field.required %}
-						                  <div class="control-group">
-						                     <label class="control-label">
-												{% if field.label == "Username" %}
-													E-Mail:
-												{% else %}
-													{{ field.label }}
-											  	{% endif %}
-											</label>
-						                      <div class="controls">{{ field }}
-						                          {% if field.help_text %}
-						                              <p class="help-inline"><small>{{ field.help_text }}</small></p>
-						                          {% endif %}
-						                      </div>
-						                  </div>
-										{% endif %}
-						              {% endif %}
-						          {% endfor %}
-						      </fieldset>
-						      <div class="form-actions">
-						          <button type="submit" class="btn btn-primary" >Submit</button>
-						      </div>
-						  </form>
-					</div><!--/sign up form-->
+					{% include 'forms/register.html' %}
 				</div>
 			</div>
 		</div>
