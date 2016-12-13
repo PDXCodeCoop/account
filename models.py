@@ -7,7 +7,6 @@ from django.utils import timezone
 #A User's Personal Info
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    photo = ThumbnailerImageField(upload_to='profiles', blank=True)
     #Location`
     city = models.CharField(max_length=50, null=True, blank=True)
     state = models.CharField(max_length=50, null=True, blank=True)
