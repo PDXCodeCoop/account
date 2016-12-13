@@ -6,7 +6,7 @@ from ..models import Profile
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'email', 'password', 'username')
+        fields = ('url', 'email', 'username')
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')

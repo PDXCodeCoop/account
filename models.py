@@ -5,7 +5,6 @@ from django.utils import timezone
 
 from easy_thumbnails.fields import ThumbnailerImageField
 
-
 #A User's Personal Info
 class Profile(models.Model):
     user = models.OneToOneField(User)
