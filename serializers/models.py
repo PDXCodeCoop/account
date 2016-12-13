@@ -1,13 +1,13 @@
 from django.forms import widgets
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from account.models import Profile
+from ..models import Profile
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username')
-        
+        fields = ('url', 'email', 'username')
+
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
     email = serializers.ReadOnlyField(source='user.email')
