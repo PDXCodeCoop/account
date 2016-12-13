@@ -3,8 +3,6 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from easy_thumbnails.fields import ThumbnailerImageField
-
 
 #A User's Personal Info
 class Profile(models.Model):
