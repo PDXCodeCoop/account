@@ -3,12 +3,12 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from easy_thumbnails.fields import ThumbnailerImageField
+#from easy_thumbnails.fields import ThumbnailerImageField
 
 #A User's Personal Info
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    photo = ThumbnailerImageField(upload_to='profiles', blank=True)
+    #photo = ThumbnailerImageField(upload_to='profiles', blank=True)
     #Location`
     city = models.CharField(max_length=50, null=True, blank=True)
     state = models.CharField(max_length=50, null=True, blank=True)
